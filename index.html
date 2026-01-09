@@ -1,13 +1,53 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Affiliate web</title>
+  <title>Recommended Products</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .item {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .item:hover {
+      transform: scale(1.03);
+    }
+    .item img {
+      width: 100%;
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Web běží 🚀</h1>
-<p>Pokud tohle vidíš, GitHub + Netlify fungují.</p>
+<div class="grid">
+
+  <!-- PRODUCT 1 -->
+  <a class="item" href="YOUR_AFFILIATE_LINK_1" target="_blank">
+    <img src="IMAGE_URL_1" alt="Product 1">
+  </a>
+
+  <!-- PRODUCT 2 -->
+  <a class="item" href="YOUR_AFFILIATE_LINK_2" target="_blank">
+    <img src="IMAGE_URL_2" alt="Product 2">
+  </a>
+
+  <!-- COPY THIS BLOCK FOR MORE PRODUCTS -->
+
+</div>
 
 </body>
 </html>
