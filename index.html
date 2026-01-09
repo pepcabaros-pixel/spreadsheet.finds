@@ -10,72 +10,69 @@
       font-family: Arial, sans-serif;
       background: #f5f5f5;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 20px;
     }
+
     .item {
-      background: white;
-      border-radius: 12px;
+      position: relative; /* důležité pro overlay */
+      display: block;
       overflow: hidden;
+      border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.2s;
     }
+
     .item:hover {
       transform: scale(1.03);
     }
+
     .item img {
       width: 100%;
       display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .item:hover .overlay {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
 
+<h1>Recommended Products</h1>
+
 <div class="grid">
 
   <!-- PRODUCT 1 -->
   <a class="item" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7572496381" target="_blank">
+    <img src="https://si.geilicdn.com/open1639122105-1234478995-654b0000018f0e3fbb440a239631_1081_1073.jpg" alt="STUSSY T-SHIRT" loading="lazy">
     <div class="overlay">Buy now</div>
-    <img src="https://si.geilicdn.com/open1639122105-1234478995-654b0000018f0e3fbb440a239631_1081_1073.jpg" STUSSY T-SHIRT="Product 1" loading="lazy">
   </a>
-  <style>
-.item {
-  position: relative;
-  display: block;
-  overflow: hidden;
-}
-.item img {
-  width: 100%;
-  display: block;
-}
-.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  text-align: center;
-  padding: 10px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.item:hover .overlay {
-  opacity: 1;
-}
-</style>
 
   <!-- PRODUCT 2 -->
-  <a class="item" href="YOUR_AFFILIATE_LINK_2" target="_blank">
-    <img src="IMAGE_URL_2" alt="Product 2" loading="lazy">
-  </a>
-
-  <!-- PRODUCT 1 -->
   <a class="item" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7381630330" target="_blank">
-    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTtMyvtHJwr4Bm7YcrrVNdkfwaGtk_hKjY9bDVKXHmRwJkbI3WdbfDE0RdrcRIO4E4Drwb7wzPHBWAT3T9ETj361RTlyqlXd5VTMMYiwgw0QL5zI181KpCU" loading="lazy">
->
+    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTtMyvtHJwr4Bm7YcrrVNdkfwaGtk_hKjY9bDVKXHmRwJkbI3WdbfDE0RdrcRIO4E4Drwb7wzPHBWAT3T9ETj361RTlyqlXd5VTMMYiwgw0QL5zI181KpCU" alt="Product 2" loading="lazy">
+    <div class="overlay">Buy now</div>
   </a>
 
 </div>
