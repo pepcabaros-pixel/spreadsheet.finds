@@ -45,25 +45,25 @@
       display: block;
     }
 
+    /* Hover "Buy now" */
     .overlay {
       position: absolute;
-      top: 0;
+      bottom: -25%; /* start 25% pod spodem */
       left: 0;
       right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
+      height: 25%; /* přesně 25% výšky obrázku */
+      background-color: #28a745; /* zelené pozadí */
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
       font-size: 18px;
-      opacity: 0;
-      transition: opacity 0.3s;
+      transition: bottom 0.3s ease;
     }
 
     .item:hover .overlay {
-      opacity: 1;
+      bottom: 0; /* vyjede nahoru */
     }
   </style>
 </head>
@@ -89,9 +89,8 @@
     <div class="overlay">Buy now</div>
   </a>
 
-  <!-- PŘIDEJ DALŠÍ PRODUKTY STEJNĚ -->
-  <!-- Stačí kopírovat blok <a class="item"> a doplnit obrázek + affiliate odkaz -->
-
+  <!-- Přidej další produkty kopírováním tohoto bloku -->
+  
 </div>
 
 </body>
