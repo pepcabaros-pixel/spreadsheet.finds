@@ -3,73 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <title>Jackets</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWRY3884G7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RWRY3884G7');
+  </script>
+
   <style>
-    * {margin:0; padding:0; box-sizing:border-box;}
-    body {font-family: Arial, sans-serif; background:#f5f5f5;}
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background:#f5f5f5;
+    }
 
+    /* ===== HEADER ===== */
     header {
-      display:flex; justify-content:center; align-items:center;
-      padding:30px; background:#333; color:white; position:fixed;
-      width:100%; top:0; z-index:1000;
-    }
-    header h1 {font-size:48px;}
-    .menu-btn {cursor:pointer; position:absolute; right:30px; display:flex; flex-direction:column; justify-content:space-between; height:30px; width:35px;}
-    .menu-btn span {display:block; height:4px; background:white; border-radius:2px;}
-    .dropdown {display:none; position:absolute; right:30px; top:70px; background:white; color:black; box-shadow:0 4px 8px rgba(0,0,0,0.2); z-index:1001;}
-    .dropdown a {display:block; padding:10px 20px; text-decoration:none; color:black;}
-    .dropdown a:hover {background:#28a745; color:white;}
-
-    .hero {
-      height:300px;
-      margin-top:100px;
-      background-image: url('https://images.unsplash.com/photo-1584447132773-d0f1c4cfba5d?auto=format&fit=crop&w=1200&q=80');
-      background-size: cover;
-      background-position:center;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:white;
-      font-size:48px;
-      text-shadow:2px 2px 5px rgba(0,0,0,0.7);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: #333;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
     }
 
+    header h1 {
+      font-size: 48px;
+    }
+
+    .menu-btn {
+      position: absolute;
+      right: 30px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .menu-btn span {
+      width: 35px;
+      height: 4px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 30px;
+      top: 80px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 12px 20px;
+      color: black;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background: #28a745;
+      color: white;
+    }
+
+    /* ===== GRID ===== */
     .grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-      gap:20px;
-      padding:20px;
+      margin-top: 140px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
     }
+
     .item {
-      position:relative;
-      background:white;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-      cursor:pointer;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.2s;
     }
-    .item:hover {transform:scale(1.03);}
-    .item img {width:100%; display:block; loading:lazy;}
-    .overlay {
-      position:absolute; bottom:0; left:0; right:0;
-      background:green; color:white; text-align:center;
-      padding:10px; opacity:0; transition: opacity 0.3s, bottom 0.3s;
-      font-weight:bold;
+
+    .item:hover {
+      transform: scale(1.03);
     }
-    .item:hover .overlay {opacity:1; bottom:25%;}
-    .top-text {
-      position:absolute; top:10px; left:10px; color:black; font-weight:bold;
+
+    .item img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ===== OVERLAYS ===== */
+    .overlay-name {
+      position: absolute;
+      top: -25%;
+      left: 0;
+      right: 0;
+      height: 25%;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .overlay-buy {
+      position: absolute;
+      bottom: -25%;
+      left: 0;
+      right: 0;
+      height: 25%;
+      background: #28a745;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .item:hover .overlay-name {
+      top: 0;
+    }
+
+    .item:hover .overlay-buy {
+      bottom: 0;
+    }
+
+    @media(max-width:768px){
+      header h1 { font-size: 36px; }
     }
   </style>
 </head>
+
 <body>
 
 <header>
   <h1>Jackets</h1>
   <div class="menu-btn" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-  <div class="dropdown" id="dropdownMenu">
+  <div class="dropdown" id="menu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
     <a href="jackets.html">Jackets</a>
@@ -77,25 +164,33 @@
   </div>
 </header>
 
-<div class="hero">Jackets</div>
-
 <div class="grid">
+
   <!-- PRODUCT 1 -->
-  <a class="item" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7572496381" target="_blank">
-    <div class="top-text">Leather Jacket</div>
-    <img src="https://images.unsplash.com/photo-1579395203216-2326dcfc1804?auto=format&fit=crop&w=400&q=80" loading="lazy" alt="Leather Jacket">
-    <div class="overlay">Buy now</div>
+  <a class="item"
+     href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=XXXXXXXX"
+     target="_blank"
+     onclick="gtag('event','click',{'event_category':'affiliate','event_label':'PUFFER JACKET'});">
+
+    <div class="overlay-name">PUFFER JACKET</div>
+
+    <img src="PASTE_JACKET_IMAGE_URL_HERE" loading="lazy" alt="Puffer Jacket">
+
+    <div class="overlay-buy">Buy now</div>
   </a>
+
 </div>
 
 <script>
   function toggleMenu() {
-    const menu = document.getElementById('dropdownMenu');
-    menu.style.display = (menu.style.display==='block')?'none':'block';
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   }
+
   window.onclick = function(e){
-    const menu = document.getElementById('dropdownMenu');
-    if(!e.target.closest('.menu-btn')) menu.style.display='none';
+    if (!e.target.closest('.menu-btn')) {
+      document.getElementById('menu').style.display = 'none';
+    }
   }
 </script>
 
