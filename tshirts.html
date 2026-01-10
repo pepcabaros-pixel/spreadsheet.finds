@@ -1,99 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>T-shirts</title>
-  <style>
-    * {margin:0; padding:0; box-sizing:border-box;}
-    body {font-family: Arial, sans-serif; background:#f5f5f5;}
+<meta charset="UTF-8">
+<title>T-shirts</title>
 
-    /* HEADER */
-    header {
-      display:flex; justify-content:center; align-items:center;
-      padding:30px; background:#333; color:white; position:fixed;
-      width:100%; top:0; z-index:1000;
-    }
-    header h1 {font-size:48px;}
-    .menu-btn {
-      cursor:pointer;
-      position:absolute;
-      right:30px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      height:30px;
-      width:35px;
-    }
-    .menu-btn span {
-      display:block;
-      height:4px;
-      background:white;
-      border-radius:2px;
-    }
-    .dropdown {
-      display:none;
-      position:absolute;
-      right:30px;
-      top:70px;
-      background:white;
-      color:black;
-      box-shadow:0 4px 8px rgba(0,0,0,0.2);
-      z-index:1001;
-    }
-    .dropdown a {
-      display:block;
-      padding:10px 20px;
-      text-decoration:none;
-      color:black;
-    }
-    .dropdown a:hover {background:#28a745; color:white;}
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f5f5f5}
 
-    /* GRID */
-    .grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-      gap:20px;
-      padding:20px;
-      margin-top:100px; /* kvůli headeru */
-    }
+/* HEADER */
+header{
+  position:fixed;top:0;width:100%;z-index:1000;
+  background:#333;color:white;
+  display:flex;justify-content:center;align-items:center;
+  padding:30px
+}
+header h1{font-size:48px}
+.menu-btn{
+  position:absolute;right:30px;cursor:pointer;
+  display:flex;flex-direction:column;gap:6px
+}
+.menu-btn span{width:35px;height:4px;background:white;border-radius:2px}
+.dropdown{
+  display:none;position:absolute;right:30px;top:80px;
+  background:white;box-shadow:0 4px 8px rgba(0,0,0,.2)
+}
+.dropdown a{
+  display:block;padding:12px 20px;color:black;text-decoration:none
+}
+.dropdown a:hover{background:#28a745;color:white}
 
-    .item {
-      position:relative;
-      background:white;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-      cursor:pointer;
-      transition: transform 0.2s;
-    }
-    .item:hover {transform:scale(1.03);}
-    .item img {width:100%; display:block; height:auto;}
+/* GRID */
+.grid{
+  margin-top:140px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:20px
+}
+.item{
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  transition:.2s
+}
+.item:hover{transform:scale(1.03)}
+.item img{width:100%;display:block}
 
-    .overlay {
-      position:absolute;
-      bottom:0; left:0; right:0;
-      background:green; color:white;
-      text-align:center; padding:10px;
-      opacity:0;
-      transition: opacity 0.3s, bottom 0.3s;
-      font-weight:bold;
-    }
-    .item:hover .overlay {opacity:1; bottom:25%;}
-
-    .top-text {
-      position:absolute;
-      top:10px;
-      left:10px;
-      color:black;
-      font-weight:bold;
-    }
-
-    @media(max-width:768px){
-      .grid {grid-template-columns:1fr;}
-    }
-
-  </style>
+/* overlays */
+.overlay-name{
+  position:absolute;top:-25%;left:0;right:0;height:25%;
+  background:rgba(0,0,0,.8);color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:bold;transition:.3s
+}
+.overlay-buy{
+  position:absolute;bottom:-25%;left:0;right:0;height:25%;
+  background:#28a745;color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:bold;font-size:18px;transition:.3s
+}
+.item:hover .overlay-name{top:0}
+.item:hover .overlay-buy{bottom:0}
+</style>
 </head>
+
 <body>
 
 <header>
@@ -101,7 +73,7 @@
   <div class="menu-btn" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
-  <div class="dropdown" id="dropdownMenu">
+  <div class="dropdown" id="menu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
     <a href="jackets.html">Jackets</a>
@@ -110,25 +82,22 @@
 </header>
 
 <div class="grid">
-  <!-- PRODUCT 1 -->
   <a class="item" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7572496381" target="_blank">
-    <div class="top-text">STUSSY T-SHIRT</div>
-    <img src="https://si.geilicdn.com/open1639122105-1234478995-654b0000018f0e3fbb440a239631_1081_1073.jpg" loading="lazy" alt="STUSSY T-SHIRT">
-    <div class="overlay">Buy now</div>
+    <div class="overlay-name">STUSSY T-SHIRT</div>
+    <img src="https://si.geilicdn.com/open1639122105-1234478995-654b0000018f0e3fbb440a239631_1081_1073.jpg" loading="lazy">
+    <div class="overlay-buy">Buy now</div>
   </a>
 </div>
 
 <script>
-  function toggleMenu() {
-    const menu = document.getElementById('dropdownMenu');
-    menu.style.display = (menu.style.display==='block')?'none':'block';
-  }
-  window.onclick = function(e){
-    const menu = document.getElementById('dropdownMenu');
-    if(!e.target.closest('.menu-btn')) menu.style.display='none';
-  }
+function toggleMenu(){
+  const m=document.getElementById('menu')
+  m.style.display=m.style.display==='block'?'none':'block'
+}
+window.onclick=e=>{
+  if(!e.target.closest('.menu-btn'))document.getElementById('menu').style.display='none'
+}
 </script>
 
 </body>
 </html>
-
