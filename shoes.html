@@ -108,7 +108,7 @@ header h1 a:hover {
 
 .item img { width:100%; display:block; }
 
-/* OVERLAYS */
+/* PRODUCT NAME OVERLAY */
 .overlay-name {
   position:absolute;
   top:-25%;
@@ -125,12 +125,13 @@ header h1 a:hover {
   transition:top 0.3s ease;
 }
 
+/* BUY NOW - zelené okénko */
 .overlay-buy {
   position:absolute;
-  bottom:25px; /* bude nad cenou */
+  bottom:0; /* start pozice */
   left:0;
   right:0;
-  height:25%;
+  height:25px;
   background:#28a745;
   color:white;
   display:flex;
@@ -138,13 +139,12 @@ header h1 a:hover {
   justify-content:center;
   font-weight:bold;
   font-size:18px;
-  transition:bottom 0.3s ease;
+  transition:opacity 0.3s ease, bottom 0.3s ease;
+  opacity:0; /* začíná neviditelné */
+  z-index:2;
 }
 
-.item:hover .overlay-name { top:0; }
-.item:hover .overlay-buy { bottom:25px; }
-
-/* CENA */
+/* PRICE - viditelná cena, která zmizí při hover */
 .price {
   position:absolute;
   bottom:0;
@@ -159,8 +159,13 @@ header h1 a:hover {
   font-weight:bold;
   font-size:16px;
   z-index:1;
-  /* ✅ ZDE UPRAV TEXT CENY */
+  transition:opacity 0.3s ease;
 }
+
+/* HOVER EFEKT */
+.item:hover .overlay-name { top:0; }
+.item:hover .overlay-buy { opacity:1; bottom:0; }
+.item:hover .price { opacity:0; }
 
 @media(max-width:768px){
   .grid {grid-template-columns:1fr;}
@@ -194,15 +199,11 @@ header h1 a:hover {
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'AIR FORCE 1'});">
 
     <div class="overlay-name">AIR FORCE 1</div>
-
     <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTLdx2L-mBFqGmsc4gp63ZmqlbaBSeHDWYvcA55N-Wj1jgXFhZiaINErxa0nGIBtrQOGXZ0qdVBaWHo-NaFfBtV446aIDoMaj82-n3t9B_-zzOwuftfgn7K9w"
          alt="AIR FORCE 1"
          loading="lazy">
-
     <div class="overlay-buy">Buy now</div>
-
-    <!-- ✅ ZDE UPRAV TEXT CENY -->
-    <div class="price">$14.73</div>
+    <div class="price">$14.73</div> <!-- upravit cenu -->
   </a>
 
   <!-- PRODUCT 2 -->
@@ -212,32 +213,25 @@ header h1 a:hover {
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'NIKE TN'});">
 
     <div class="overlay-name">NIKE TN</div>
-
     <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV81kYl_Be19MJPV5o6mKT1YxXvDYBDgfApT_MWpfWq6dHOCQuL8PYIIUwUJSUZUzJ_mredldClai9P8DqBMXZ1b79tMB3nkqscRtJ55bKmAfzG3BzpnU-TRZrwePL5s7oQFyt&usqp=CAc"
          alt="NIKE TN"
          loading="lazy">
-
     <div class="overlay-buy">Buy now</div>
-
-    <!-- ✅ ZDE UPRAV TEXT CENY -->
-    <div class="price">$24.81</div>
+    <div class="price">$24.81</div> <!-- upravit cenu -->
   </a>
-  
-   <a class="item"
+
+  <!-- PRODUCT 3 -->
+  <a class="item"
      href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7306822575"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'ADIDAS CAMPUS'});">
 
     <div class="overlay-name">ADIDAS CAMPUS</div>
-
     <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS77QbpAvk6kwfjUmGCcPPUc5p8wsdLtT1Lu22jaJH4D6rBJ64aFrSWAMjPrtMVVj0KBXhsdXm56mp9Tpx_xC5IAFEaO62OGayqqoHV0UC5-Wn72sPywc7HwtZyE0dQC-KxDZhs&usqp=CAc"
          alt="ADIDAS CAMPUS"
          loading="lazy">
-
     <div class="overlay-buy">Buy now</div>
-
-    <!-- ✅ ZDE UPRAV TEXT CENY -->
-    <div class="price">$20.16</div>
+    <div class="price">$20.16</div> <!-- upravit cenu -->
   </a>
 
 </div>
