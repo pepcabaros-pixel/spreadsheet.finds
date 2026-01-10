@@ -19,11 +19,32 @@
 
     /* HEADER */
     header {
-      display:flex; justify-content:center; align-items:center;
-      padding:30px; background:#333; color:white; position:fixed;
-      width:100%; top:0; z-index:1000;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:30px;
+      background:#333;
+      color:white;
+      position:fixed;
+      width:100%;
+      top:0;
+      z-index:1000;
     }
-    header h1 {font-size:48px;}
+
+    header h1 {
+      font-size:48px;
+    }
+
+    /* klikací nápis */
+    header h1 a {
+      color:white;
+      text-decoration:none;
+    }
+
+    header h1 a:hover {
+      opacity:0.85;
+    }
+
     .menu-btn {
       cursor:pointer;
       position:absolute;
@@ -34,12 +55,14 @@
       height:30px;
       width:35px;
     }
+
     .menu-btn span {
       display:block;
       height:4px;
       background:white;
       border-radius:2px;
     }
+
     .dropdown {
       display:none;
       position:absolute;
@@ -50,13 +73,18 @@
       box-shadow:0 4px 8px rgba(0,0,0,0.2);
       z-index:1001;
     }
+
     .dropdown a {
       display:block;
       padding:10px 20px;
       text-decoration:none;
       color:black;
     }
-    .dropdown a:hover {background:#28a745; color:white;}
+
+    .dropdown a:hover {
+      background:#28a745;
+      color:white;
+    }
 
     /* GRID */
     .grid {
@@ -64,7 +92,7 @@
       grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
       gap:20px;
       padding:20px;
-      margin-top:120px; /* kvůli headeru */
+      margin-top:120px;
     }
 
     .item {
@@ -85,62 +113,66 @@
       width:100%;
       display:block;
       height:auto;
-      loading:lazy;
     }
 
-    /* Zelený overlay Buy now */
+    /* BUY NOW */
     .overlay-buy {
-      position: absolute;
-      bottom: -25%;
-      left: 0;
-      right: 0;
-      height: 25%;
-      background-color: #28a745;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
-      transition: bottom 0.3s ease;
-    }
-    .item:hover .overlay-buy {
-      bottom: 0;
+      position:absolute;
+      bottom:-25%;
+      left:0;
+      right:0;
+      height:25%;
+      background:#28a745;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      font-size:18px;
+      transition:bottom 0.3s ease;
     }
 
-    /* Černý text s názvem produktu nahoře */
-    .overlay-name {
-      position: absolute;
-      top: -25%;
-      left: 0;
-      right: 0;
-      height: 25%;
-      background-color: rgba(0,0,0,0.8);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 16px;
-      transition: top 0.3s ease;
+    .item:hover .overlay-buy {
+      bottom:0;
     }
+
+    /* PRODUCT NAME */
+    .overlay-name {
+      position:absolute;
+      top:-25%;
+      left:0;
+      right:0;
+      height:25%;
+      background:rgba(0,0,0,0.8);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      font-size:16px;
+      transition:top 0.3s ease;
+    }
+
     .item:hover .overlay-name {
-      top: 0;
+      top:0;
     }
 
     @media(max-width:768px){
       .grid {grid-template-columns:1fr;}
     }
-
   </style>
 </head>
+
 <body>
 
 <header>
-  <h1>Shoes</h1>
+  <!-- 👇 KLIKACÍ NÁPIS -->
+  <h1><a href="index.html">Shoes</a></h1>
+
   <div class="menu-btn" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
+
   <div class="dropdown" id="dropdownMenu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
@@ -152,11 +184,17 @@
 <div class="grid">
 
   <!-- PRODUCT 1 -->
-  <a class="item" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7381630330" target="_blank"
+  <a class="item"
+     href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7381630330"
+     target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'AIR FORCE 1'});">
+
     <div class="overlay-name">AIR FORCE 1</div>
-    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTLdx2L-mBFqGmsc4gp63ZmqlbaBSeHDWYvcA55N-Wj1jgXFhZiaINErxa0nGIBtrQOGXZ0qdVBaWHo-NaFfBtV446aIDoMaj82-n3t9B_-zzOwuftfgn7K9w" 
-         alt="AIR FORCE 1" loading="lazy">
+
+    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTLdx2L-mBFqGmsc4gp63ZmqlbaBSeHDWYvcA55N-Wj1jgXFhZiaINErxa0nGIBtrQOGXZ0qdVBaWHo-NaFfBtV446aIDoMaj82-n3t9B_-zzOwuftfgn7K9w"
+         alt="AIR FORCE 1"
+         loading="lazy">
+
     <div class="overlay-buy">Buy now</div>
   </a>
 
@@ -165,14 +203,16 @@
 <script>
   function toggleMenu() {
     const menu = document.getElementById('dropdownMenu');
-    menu.style.display = (menu.style.display==='block')?'none':'block';
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
   }
+
   window.onclick = function(e){
     const menu = document.getElementById('dropdownMenu');
-    if(!e.target.closest('.menu-btn')) menu.style.display='none';
+    if(!e.target.closest('.menu-btn')) {
+      menu.style.display='none';
+    }
   }
 </script>
 
 </body>
 </html>
-
