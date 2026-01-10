@@ -51,7 +51,8 @@ header h1 a:hover{opacity:.85}
   overflow:hidden;
   border-radius:12px;
   box-shadow:0 4px 10px rgba(0,0,0,.1);
-  transition:.2s
+  transition:.2s;
+  cursor:pointer;
 }
 .item:hover{transform:scale(1.03)}
 .item img{width:100%;display:block}
@@ -64,20 +65,37 @@ header h1 a:hover{opacity:.85}
   font-weight:bold;transition:.3s
 }
 .overlay-buy{
-  position:absolute;bottom:-25%;left:0;right:0;height:25%;
+  position:absolute;bottom:0;left:0;right:0;height:25px;
   background:#28a745;color:white;
   display:flex;align-items:center;justify-content:center;
-  font-weight:bold;font-size:18px;transition:.3s
+  font-weight:bold;font-size:18px;
+  transition:opacity 0.3s ease,bottom 0.3s ease;
+  opacity:0; /* začíná skryté */
+  z-index:2;
 }
+.price{
+  position:absolute;bottom:0;left:0;right:0;height:25px;
+  background:rgba(0,0,0,.85);color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:bold;font-size:16px;
+  transition:opacity 0.3s ease;
+  z-index:1;
+}
+
+/* hover efekty */
 .item:hover .overlay-name{top:0}
-.item:hover .overlay-buy{bottom:0}
+.item:hover .overlay-buy{opacity:1; bottom:0}
+.item:hover .price{opacity:0}
+
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <!-- 👇 klikací nápis -->
   <h1><a href="index.html">T-shirts</a></h1>
 
   <div class="menu-btn" onclick="toggleMenu()">
@@ -92,42 +110,48 @@ header h1 a:hover{opacity:.85}
 </header>
 
 <div class="grid">
+  <!-- PRODUCT 1 -->
   <a class="item"
      href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7572496381"
      target="_blank">
     <div class="overlay-name">STUSSY T-SHIRT</div>
     <img src="https://si.geilicdn.com/open1639122105-1234478995-654b0000018f0e3fbb440a239631_1081_1073.jpg" loading="lazy">
     <div class="overlay-buy">Buy now</div>
+    <!-- 👇 upravit cenu zde -->
+    <div class="price">$15.5</div>
   </a>
   
-   <!-- 👇 toto zkopirovat -->
-   <a class="item"
+  <!-- PRODUCT 2 -->
+  <a class="item"
      href="https://www.loongbuy.com/product-details?invitecode=2N24N0&1688=904021521709"
      target="_blank">
     <div class="overlay-name">FOOTBALL JERSEY 1</div>
     <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQY7kSU9AB81K0ta4Ntt2QlZgFTO4JURJJgbs9TdgaHq-9fVlxr-QGRqWesJ3pLukfBWtC7aYtjjPNYD3_MostwbA_iWH2UAPDuVTfIOmr3fPGP7L26KedbUof7DWAA_C1izvrzYA&usqp=CAc" loading="lazy">
     <div class="overlay-buy">Buy now</div>
+    <!-- 👇 upravit cenu zde -->
+    <div class="price">$6.51</div>
   </a>
-   <!-- 👇 toto je konec kopirovani -->
   
-<a class="item"
+  <!-- PRODUCT 3 -->
+  <a class="item"
      href="https://www.loongbuy.com/product-details?invitecode=2N24N0&1688=901980139900"
      target="_blank">
     <div class="overlay-name">FOOTBALL JERSEY 2</div>
     <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSdD6ZYcHBLL37xYm5pSJZc27uLSnSbsG4WZNSHPhTLsuIc-9Vk6JfibVXRsJcRra05ytHAm9Xqwbhq0ChSztcv9p5UjF91d6FjymRgX8kFd4PJXp6WDtOsVCUNJgU1aGkGHmHvwg&usqp=CAc" loading="lazy">
     <div class="overlay-buy">Buy now</div>
+    <!-- 👇 upravit cenu zde -->
+    <div class="price">$4.65</div>
   </a>
-  
 </div>
 
 <script>
 function toggleMenu(){
-  const m=document.getElementById('menu')
-  m.style.display=m.style.display==='block'?'none':'block'
+  const m=document.getElementById('menu');
+  m.style.display = m.style.display==='block'?'none':'block';
 }
 window.onclick=e=>{
   if(!e.target.closest('.menu-btn'))
-    document.getElementById('menu').style.display='none'
+    document.getElementById('menu').style.display='none';
 }
 </script>
 
