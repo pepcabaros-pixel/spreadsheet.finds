@@ -14,11 +14,7 @@
   </script>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       font-family: Arial, sans-serif;
@@ -41,6 +37,15 @@
 
     header h1 {
       font-size: 42px;
+    }
+
+    /* klikací nadpis */
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+    header h1 a:hover {
+      opacity: 0.85;
     }
 
     .menu-btn {
@@ -153,19 +158,11 @@
       z-index: 2;
     }
 
-    .item:hover .overlay-name {
-      top: 0;
-    }
+    .item:hover .overlay-name { top: 0; }
+    .item:hover .overlay-buy { bottom: 0; }
 
-    .item:hover .overlay-buy {
-      bottom: 0;
-    }
-
-    /* ===== MOBILE ===== */
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 32px;
-      }
+      header h1 { font-size: 32px; }
     }
   </style>
 </head>
@@ -173,7 +170,8 @@
 <body>
 
 <header>
-  <h1>Hoodies</h1>
+  <!-- 👇 klikací nadpis -->
+  <h1><a href="index.html">Hoodies</a></h1>
 
   <div class="menu-btn" onclick="toggleMenu()">
     <span></span>
@@ -193,7 +191,6 @@
 <div class="content">
   <div class="grid">
 
-    <!-- PRODUCT 1 -->
     <a class="item"
        href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7611547689"
        target="_blank"
@@ -212,16 +209,16 @@
 </div>
 
 <script>
-  function toggleMenu() {
-    const menu = document.getElementById('menu');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  }
+function toggleMenu() {
+  const menu = document.getElementById('menu');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
 
-  window.onclick = function(e) {
-    if (!e.target.closest('.menu-btn')) {
-      document.getElementById('menu').style.display = 'none';
-    }
-  };
+window.onclick = function(e) {
+  if (!e.target.closest('.menu-btn')) {
+    document.getElementById('menu').style.display = 'none';
+  }
+};
 </script>
 
 </body>
