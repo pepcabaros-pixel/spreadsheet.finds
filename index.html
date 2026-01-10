@@ -14,7 +14,7 @@
       justify-content: center;
       align-items: center;
       padding: 30px;
-      background-color: #333;
+      background: #333;
       color: white;
       position: fixed;
       width: 100%;
@@ -67,11 +67,11 @@
     }
 
     .dropdown a:hover {
-      background-color: #28a745;
+      background: #28a745;
       color: white;
     }
 
-    /* ===== LANDING GRID ===== */
+    /* ===== LANDING ===== */
     .container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -86,14 +86,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       color: white;
       font-size: 32px;
       font-weight: bold;
+      cursor: pointer;
       text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
       background-size: cover;
       background-position: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s;
     }
 
     .half:hover { transform: scale(1.05); }
@@ -115,6 +115,7 @@
     }
 
     .popup {
+      position: relative;
       background: white;
       padding: 30px;
       max-width: 420px;
@@ -126,7 +127,21 @@
     .popup h2 { margin-bottom: 15px; }
     .popup p { margin-bottom: 20px; color: #555; }
 
-    /* ===== CUSTOM CHECKBOX ===== */
+    /* CLOSE X */
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 18px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #333;
+    }
+
+    /* CHECKBOX */
     .checkbox-wrap {
       display: flex;
       align-items: center;
@@ -134,12 +149,9 @@
       margin-bottom: 20px;
       font-size: 14px;
       cursor: pointer;
-      user-select: none;
     }
 
-    .checkbox-wrap input {
-      display: none;
-    }
+    .checkbox-wrap input { display: none; }
 
     .checkmark {
       width: 20px;
@@ -154,8 +166,8 @@
     .checkmark::after {
       content: "✔";
       color: white;
-      font-size: 14px;
       display: none;
+      font-size: 14px;
     }
 
     .checkbox-wrap input:checked + .checkmark {
@@ -167,13 +179,13 @@
     }
 
     .popup button {
-      padding: 10px 20px;
-      border: none;
+      padding: 12px 25px;
       background: #28a745;
       color: white;
+      border: none;
       font-weight: bold;
-      cursor: pointer;
       border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -182,11 +194,9 @@
 
 <header>
   <h1><a href="index.html">SPREADSHEET FINDS</a></h1>
-
   <div class="menu-btn" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
-
   <div class="dropdown" id="dropdownMenu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
@@ -202,27 +212,32 @@
   <div class="half hoodies" onclick="location.href='hoodies.html'">Sweatshirts</div>
 </div>
 
-<!-- ================= POPUP ================= -->
+<!-- ===== POPUP ===== -->
 <div class="popup-bg" id="popup">
   <div class="popup">
 
-    <!-- ✏️ SEM NAPIŠ NADPIS -->
+    <!-- ❌ KŘÍŽEK -->
+    <div class="close-btn" onclick="closePopup()">✕</div>
+
+    <!-- ✏️ NADPIS -->
     <h2>Important information</h2>
 
-    <!-- ✏️ SEM NAPIŠ HLAVNÍ TEXT POPUPU -->
+    <!-- ✏️ HLAVNÍ TEXT -->
     <p>
       This website contains affiliate links.  
       If you purchase through these links, I may earn a commission at no extra cost to you.
     </p>
 
-    <!-- ✏️ SEM NAPIŠ TEXT U ZAŠKRTÁVACÍHO POLÍČKA -->
+    <!-- ✏️ CHECKBOX TEXT -->
     <label class="checkbox-wrap">
       <input type="checkbox" id="dontShow">
       <span class="checkmark"></span>
       Don’t show this again
     </label>
 
-    <button onclick="closePopup()">Continue</button>
+    <!-- ✏️ TEXT TLAČÍTKA + ODKAZ -->
+    <button onclick="goToLink()">Shop</button>
+
   </div>
 </div>
 
@@ -250,6 +265,13 @@
       localStorage.setItem('hidePopup', 'true');
     }
     popup.style.display = 'none';
+  }
+
+  function goToLink() {
+    if (checkbox.checked) {
+      localStorage.setItem('hidePopup', 'true');
+    }
+    window.location.href = "https://YOUR-LINK-HERE.com"; // ✏️ SEM DEJ ODKAZ
   }
 </script>
 
