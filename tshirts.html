@@ -16,6 +16,14 @@ header{
   padding:30px
 }
 header h1{font-size:48px}
+
+/* klikací nápis */
+header h1 a{
+  color:white;
+  text-decoration:none;
+}
+header h1 a:hover{opacity:.85}
+
 .menu-btn{
   position:absolute;right:30px;cursor:pointer;
   display:flex;flex-direction:column;gap:6px
@@ -69,7 +77,9 @@ header h1{font-size:48px}
 <body>
 
 <header>
-  <h1>T-shirts</h1>
+  <!-- 👇 klikací nápis -->
+  <h1><a href="index.html">T-shirts</a></h1>
+
   <div class="menu-btn" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
@@ -82,7 +92,9 @@ header h1{font-size:48px}
 </header>
 
 <div class="grid">
-  <a class="item" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7572496381" target="_blank">
+  <a class="item"
+     href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7572496381"
+     target="_blank">
     <div class="overlay-name">STUSSY T-SHIRT</div>
     <img src="https://si.geilicdn.com/open1639122105-1234478995-654b0000018f0e3fbb440a239631_1081_1073.jpg" loading="lazy">
     <div class="overlay-buy">Buy now</div>
@@ -95,7 +107,8 @@ function toggleMenu(){
   m.style.display=m.style.display==='block'?'none':'block'
 }
 window.onclick=e=>{
-  if(!e.target.closest('.menu-btn'))document.getElementById('menu').style.display='none'
+  if(!e.target.closest('.menu-btn'))
+    document.getElementById('menu').style.display='none'
 }
 </script>
 
