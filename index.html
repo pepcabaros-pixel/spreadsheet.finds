@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LOONGBUY SPREADSHEET</title>
-
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body, html { font-family: Arial, sans-serif; height:100%; }
@@ -13,7 +13,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 30px;
+      padding: 20px;
       background: #333;
       color: white;
       position: fixed;
@@ -21,9 +21,7 @@
       top: 0;
       z-index: 1000;
     }
-
-    header h1 { font-size: 48px; }
-
+    header h1 { font-size: 36px; }
     header h1 a {
       color: white;
       text-decoration: none;
@@ -32,16 +30,15 @@
     .menu-btn {
       cursor: pointer;
       position: absolute;
-      right: 30px;
+      right: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 30px;
-      width: 35px;
+      height: 24px;
+      width: 30px;
     }
-
     .menu-btn span {
-      height: 4px;
+      height: 3px;
       background: white;
       border-radius: 2px;
     }
@@ -49,13 +46,12 @@
     .dropdown {
       display: none;
       position: absolute;
-      right: 30px;
-      top: 100px;
+      right: 20px;
+      top: 60px;
       background: white;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       z-index: 1001;
     }
-
     .dropdown a {
       display: block;
       padding: 12px 20px;
@@ -63,7 +59,6 @@
       color: black;
       font-weight: bold;
     }
-
     .dropdown a:hover {
       background: #28a745;
       color: white;
@@ -75,25 +70,24 @@
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 1fr);
       gap: 20px;
-      margin-top: 120px;
-      height: calc(100vh - 120px);
+      margin-top: 100px;
+      height: calc(100vh - 100px);
       padding: 20px;
     }
-
     .half {
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 32px;
+      font-size: 28px;
       font-weight: bold;
       cursor: pointer;
       text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
       background-size: cover;
       background-position: center;
       transition: transform 0.3s;
+      border-radius: 12px;
     }
-
     .half:hover { transform: scale(1.05); }
 
     .shoes   { background-image: url('https://sectionstore.cz/cdn/shop/files/NikeAirForce1LowSupremeBlack.jpg?v=1723555340&width=1445'); }
@@ -101,32 +95,29 @@
     .jackets { background-image: url('https://sectionstore.cz/cdn/shop/files/PalacePertexOpaqueBalaclavaPufferJacketBlack.jpg?v=1733326472&width=1445'); }
     .hoodies { background-image: url('https://sectionstore.cz/cdn/shop/files/SupremeBoxLogoHoodedSweatshirt_2025_Black.jpg?v=1765061357&width=1445'); }
     .pants   { background-image: url('https://trapstarclothingpl.com/wp-content/uploads/2025/12/Its-a-Secret-Autumn-Trapstar-Pants.webp'); }
-    .other  { background-image: url('https://mobilegear-eshop.s3.eu-central-1.amazonaws.com/prod/78a25c023bafecb1eabb95bec4352e7e.jpeg'); }
+    .other   { background-image: url('https://mobilegear-eshop.s3.eu-central-1.amazonaws.com/prod/78a25c023bafecb1eabb95bec4352e7e.jpeg'); }
 
     /* ===== POPUP ===== */
     .popup-bg {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.6);
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
       z-index: 2000;
     }
-
     .popup {
       position: relative;
       background: white;
-      padding: 30px;
+      padding: 25px 30px;
       max-width: 420px;
       width: 90%;
       border-radius: 12px;
       text-align: center;
     }
-
     .popup h2 { margin-bottom: 15px; }
     .popup p { margin-bottom: 20px; color: #555; }
-
     .close-btn {
       position: absolute;
       top: 12px;
@@ -135,9 +126,7 @@
       color: #999;
       cursor: pointer;
     }
-
     .close-btn:hover { color: #333; }
-
     .checkbox-wrap {
       display: flex;
       align-items: center;
@@ -146,9 +135,7 @@
       font-size: 14px;
       cursor: pointer;
     }
-
     .checkbox-wrap input { display: none; }
-
     .checkmark {
       width: 20px;
       height: 20px;
@@ -158,22 +145,18 @@
       align-items: center;
       justify-content: center;
     }
-
     .checkmark::after {
       content: "✔";
       color: white;
       display: none;
       font-size: 14px;
     }
-
     .checkbox-wrap input:checked + .checkmark {
       background: #28a745;
     }
-
     .checkbox-wrap input:checked + .checkmark::after {
       display: block;
     }
-
     .popup button {
       padding: 12px 25px;
       background: #28a745;
@@ -183,9 +166,19 @@
       border-radius: 6px;
       cursor: pointer;
     }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width: 768px){
+      .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 1fr);
+        height: auto;
+      }
+      .half { font-size: 22px; min-height: 150px; }
+      header h1 { font-size: 28px; }
+    }
   </style>
 </head>
-
 <body>
 
 <header>
@@ -204,12 +197,12 @@
 </header>
 
 <div class="container">
-  <div class="half shoes"   onclick="location.href='shoes.html'">Shoes</div>
-  <div class="half tshirts" onclick="location.href='tshirts.html'">T-shirts</div>
-  <div class="half jackets" onclick="location.href='jackets.html'">Jackets</div>
-  <div class="half hoodies" onclick="location.href='hoodies.html'">Hoodies</div>
-  <div class="half pants"   onclick="location.href='pants.html'">Pants</div>
-  <div class="half other"  onclick="location.href='other.html'">Other</div>
+  <div class="half shoes"   onclick="goPage('shoes.html')">Shoes</div>
+  <div class="half tshirts" onclick="goPage('tshirts.html')">T-shirts</div>
+  <div class="half jackets" onclick="goPage('jackets.html')">Jackets</div>
+  <div class="half hoodies" onclick="goPage('hoodies.html')">Hoodies</div>
+  <div class="half pants"   onclick="goPage('pants.html')">Pants</div>
+  <div class="half other"   onclick="goPage('other.html')">Other</div>
 </div>
 
 <!-- ===== POPUP ===== -->
@@ -230,23 +223,33 @@
 </div>
 
 <script>
-function toggleMenu(){
-  const menu = document.getElementById('dropdownMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
-
-window.onclick = e => {
-  if(!e.target.closest('.menu-btn')){
-    document.getElementById('dropdownMenu').style.display = 'none';
-  }
-};
-
+const dropdown = document.getElementById('dropdownMenu');
 const popup = document.getElementById('popup');
 const checkbox = document.getElementById('dontShow');
 
-if(localStorage.getItem('hidePopup') === 'true'){
-  popup.style.display = 'none';
+function toggleMenu(){
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
+
+// Hide menu when clicking outside header
+window.onclick = e => {
+  if(!e.target.closest('header')){
+    dropdown.style.display = 'none';
+  }
+};
+
+function goPage(url){
+  window.location.href = url;
+}
+
+// ===== POPUP LOGIC =====
+window.onload = () => {
+  setTimeout(() => {
+    if(localStorage.getItem('hidePopup') !== 'true'){
+      popup.style.display = 'flex';
+    }
+  }, 2000); // popup po 2 sekundách
+};
 
 function closePopup(){
   if(checkbox.checked){
@@ -259,7 +262,8 @@ function goToLink(){
   if(checkbox.checked){
     localStorage.setItem('hidePopup','true');
   }
-  window.location.href = "https://www.loongbuy.com/register?code=2N24N0";
+  // bezpečné otevření v novém okně
+  window.open("https://www.loongbuy.com/register?code=2N24N0", "_blank", "noopener,noreferrer");
 }
 </script>
 
