@@ -1,66 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Other</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: Arial, sans-serif; background:#f5f5f5; }
+  :root{
+    --bg:#f6f7fb;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --green:#22c55e;
+    --green-dark:#16a34a;
+    --header-top:#0b1220;
+    --header-bottom:#111827;
+    --ring:rgba(34,197,94,.35);
+    --shadow: 0 10px 30px rgba(2,6,23,.08);
+    --shadow-hover: 0 18px 45px rgba(2,6,23,.14);
+    --radius:16px;
+  }
 
-/* ===== HEADER ===== */
-header {
-  display:flex; justify-content:center; align-items:center;
-  padding:30px; background:#333; color:white; position:fixed; width:100%; top:0; z-index:1000;
-}
-header h1 { font-size:36px; }
-header h1 a { color:white; text-decoration:none; }
-header h1 a:hover { opacity:0.85; }
-.menu-btn { position:absolute; right:20px; cursor:pointer; display:flex; flex-direction:column; gap:6px; }
-.menu-btn span { width:30px; height:3px; background:white; border-radius:2px; }
-.dropdown { display:none; position:absolute; right:20px; top:60px; background:white; box-shadow:0 4px 8px rgba(0,0,0,0.2); }
-.dropdown a { display:block; padding:12px 20px; color:black; text-decoration:none; }
-.dropdown a:hover { background:#28a745; color:white; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
 
-/* ===== SORT BUTTONS ===== */
-.sort-buttons { margin-top:100px; text-align:center; }
-.sort-buttons button {
-  padding:8px 16px; margin:0 5px; background:#28a745; color:white;
-  border:none; border-radius:6px; cursor:pointer; font-weight:bold;
-}
-.sort-buttons button:hover { opacity:0.85; }
+  /* ===== HEADER ===== */
+  header{
+    position:fixed;
+    top:0; left:0; width:100%;
+    z-index:1000;
+    background:linear-gradient(180deg, var(--header-top) 0%, var(--header-bottom) 100%);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:22px 18px;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
+  }
+  header h1{
+    font-size:42px;
+    letter-spacing:.5px;
+    line-height:1;
+  }
+  header h1 a{ color:white; text-decoration:none; }
+  header h1 a:hover{ opacity:0.9; }
 
-/* ===== GRID ===== */
-.grid { margin-top:20px; padding:20px; display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
-.item { position:relative; overflow:hidden; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; cursor:pointer; }
-.item:hover { transform:scale(1.03); }
-.item img { width:100%; display:block; }
+  .menu-btn{
+    position:absolute; right:18px;
+    cursor:pointer;
+    display:flex; flex-direction:column; gap:6px;
+    padding:12px;
+    border-radius:14px;
+    transition: background .2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .menu-btn:hover{ background:rgba(255,255,255,.08); }
+  .menu-btn span{
+    width:34px; height:3px;
+    background:white; border-radius:2px;
+  }
 
-/* ===== OVERLAYS ===== */
-.overlay-name {
-  position:absolute; top:-25%; left:0; right:0; height:25%;
-  background:rgba(0,0,0,0.8); color:white; display:flex; align-items:center; justify-content:center;
-  font-weight:bold; transition:top 0.3s ease;
-}
-.overlay-buy {
-  position:absolute; bottom:0; left:0; right:0; height:25px; background:#28a745; color:white;
-  display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:18px;
-  opacity:0; z-index:2; transition:opacity 0.3s ease, bottom 0.3s ease;
-}
-.price {
-  position:absolute; bottom:0; left:0; right:0; height:25px; background:rgba(0,0,0,0.85);
-  color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:16px;
-  z-index:1; transition:opacity 0.3s ease;
-}
-.item:hover .overlay-name { top:0; }
-.item:hover .overlay-buy { opacity:1; bottom:0; }
-.item:hover .price { opacity:0; }
+  /* Desktop dropdown */
+  .dropdown{
+    display:none;
+    position:absolute;
+    right:18px;
+    top:74px;
+    background:white;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    z-index:1001;
+    min-width:200px;
+    border:1px solid rgba(15,23,42,.08);
+  }
+  .dropdown a{
+    display:block;
+    padding:12px 14px;
+    color:var(--text);
+    text-decoration:none;
+    font-weight:800;
+  }
+  .dropdown a:hover{
+    background:rgba(34,197,94,.10);
+    color:var(--green-dark);
+  }
 
-@media(max-width:768px){
-  .grid { grid-template-columns:1fr; }
-  header h1 { font-size:28px; }
-}
+  /* ===== MOBILE MENU (sheet) ===== */
+  .mobile-sheet{
+    position:fixed;
+    inset:0;
+    background:rgba(2,6,23,.55);
+    backdrop-filter: blur(6px);
+    display:none;
+    z-index:2000;
+    padding:14px;
+  }
+  .mobile-sheet.open{ display:block; }
+  .sheet-card{
+    width:100%;
+    max-width:560px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:22px;
+    box-shadow:0 25px 70px rgba(2,6,23,.30);
+    overflow:hidden;
+    border:1px solid rgba(15,23,42,.08);
+  }
+  .sheet-top{
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(15,23,42,.08);
+  }
+  .sheet-top strong{ font-size:16px; }
+  .sheet-close{
+    border:none;
+    background:rgba(2,6,23,.06);
+    padding:10px 12px;
+    border-radius:12px;
+    font-weight:900;
+    cursor:pointer;
+  }
+  .sheet-links a{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 16px;
+    text-decoration:none;
+    font-weight:900;
+    color:var(--text);
+    border-bottom:1px solid rgba(15,23,42,.06);
+  }
+  .sheet-links a:last-child{ border-bottom:none; }
+  .sheet-links a:hover{
+    background:rgba(34,197,94,.08);
+    color:var(--green-dark);
+  }
+
+  /* ===== SPACER ===== */
+  .spacer{ height:86px; }
+
+  /* ===== SORT BAR ===== */
+  .toolbar{
+    position:sticky;
+    top:86px;
+    z-index:900;
+    padding:14px 18px;
+    display:flex;
+    justify-content:center;
+    background:rgba(246,247,251,.75);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid rgba(15,23,42,.06);
+  }
+  .toolbar-inner{
+    width:min(1100px, 100%);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .toolbar-title{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .toolbar-title strong{ font-size:14px; letter-spacing:.2px; }
+  .toolbar-title span{ font-size:12px; color:var(--muted); }
+
+  .sort-buttons{
+    display:flex; gap:10px; flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  .sort-buttons button{
+    padding:10px 14px;
+    border-radius:999px;
+    border:1px solid rgba(15,23,42,.10);
+    background:white;
+    color:var(--text);
+    cursor:pointer;
+    font-weight:900;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+    box-shadow:0 6px 16px rgba(2,6,23,.06);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sort-buttons button:hover{
+    transform: translateY(-1px);
+    box-shadow:0 10px 20px rgba(2,6,23,.10);
+  }
+  .sort-buttons button.active{
+    background:linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+    color:white;
+    border-color:transparent;
+    box-shadow:0 10px 22px var(--ring);
+  }
+
+  /* ===== GRID ===== */
+  .grid{
+    padding:16px 18px 40px;
+    display:grid;
+    width:min(1100px, 100%);
+    margin:0 auto;
+    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:16px;
+  }
+
+  .item{
+    position:relative;
+    overflow:hidden;
+    border-radius:var(--radius);
+    background:var(--card);
+    box-shadow:var(--shadow);
+    transition: transform .18s ease, box-shadow .18s ease;
+    cursor:pointer;
+    border:1px solid rgba(15,23,42,.06);
+    text-decoration:none;
+    display:block;
+  }
+  .item:hover{
+    transform: translateY(-4px);
+    box-shadow:var(--shadow-hover);
+  }
+
+  .item img{
+    width:100%;
+    display:block;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background:#ffffff;
+    padding:14px;
+  }
+
+  /* ===== OVERLAYS ===== */
+  .overlay-name{
+    position:absolute;
+    top:10px; left:10px; right:10px;
+    padding:10px 12px;
+    border-radius:12px;
+    background:rgba(15,23,42,.86);
+    color:white;
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:.3px;
+    opacity:0;
+    transform: translateY(-6px);
+    transition: opacity .2s ease, transform .2s ease;
+    text-align:center;
+  }
+
+  .overlay-buy{
+    position:absolute;
+    left:10px; right:10px; bottom:10px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:1000;
+    font-size:16px;
+    opacity:0;
+    transform: translateY(6px);
+    transition: opacity .2s ease, transform .2s ease;
+    z-index:2;
+    box-shadow:0 10px 24px var(--ring);
+  }
+
+  .price{
+    position:absolute;
+    left:10px; right:10px; bottom:10px;
+    height:42px;
+    border-radius:12px;
+    background:rgba(2,6,23,.85);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:1000;
+    font-size:16px;
+    z-index:1;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+
+  .item:hover .overlay-name{
+    opacity:1;
+    transform: translateY(0);
+  }
+  .item:hover .overlay-buy{
+    opacity:1;
+    transform: translateY(0);
+  }
+  .item:hover .price{
+    opacity:0;
+    transform: translateY(6px);
+  }
+
+  /* Touch devices: show name by default (no hover) */
+  @media (hover: none){
+    .overlay-name{ opacity:1; transform:none; }
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width:768px){
+    header h1{ font-size:34px; }
+    .dropdown{ display:none !important; }
+    .spacer{ height:74px; }
+    .toolbar{ top:74px; padding:12px 12px; }
+    .toolbar-inner{ flex-direction:column; align-items:flex-start; gap:10px; }
+    .sort-buttons{ width:100%; justify-content:space-between; }
+    .sort-buttons button{ flex:1; padding:12px 12px; font-size:14px; }
+
+    .grid{
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+      padding:14px 12px 40px;
+    }
+    .item img{ padding:10px; }
+    .overlay-name{ top:8px; left:8px; right:8px; font-size:12px; }
+    .overlay-buy,.price{ left:8px; right:8px; bottom:8px; height:40px; font-size:15px; }
+  }
+
+  @media (max-width:420px){
+    .grid{ grid-template-columns:1fr; }
+    .item img{ padding:14px; }
+    header h1{ font-size:32px; }
+    .overlay-name{ font-size:13px; }
+  }
 </style>
 </head>
 
@@ -68,7 +339,12 @@ header h1 a:hover { opacity:0.85; }
 
 <header>
   <h1><a href="index.html">Other</a></h1>
-  <div class="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+
+  <div class="menu-btn" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- Desktop dropdown -->
   <div class="dropdown" id="menu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
@@ -79,23 +355,58 @@ header h1 a:hover { opacity:0.85; }
   </div>
 </header>
 
-<!-- SORT BUTTONS -->
-<div class="sort-buttons">
-  <button onclick="sortProducts('asc')">Sort by Price ↑</button>
-  <button onclick="sortProducts('desc')">Sort by Price ↓</button>
+<!-- Mobile sheet menu -->
+<div class="mobile-sheet" id="mobileSheet" onclick="sheetBackdropClose(event)">
+  <div class="sheet-card" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="sheet-top">
+      <strong>Menu</strong>
+      <button class="sheet-close" onclick="closeMobileMenu()">✕</button>
+    </div>
+    <div class="sheet-links">
+      <a href="shoes.html">Shoes <span>›</span></a>
+      <a href="tshirts.html">T-shirts <span>›</span></a>
+      <a href="jackets.html">Jackets <span>›</span></a>
+      <a href="hoodies.html">Hoodies <span>›</span></a>
+      <a href="pants.html">Pants <span>›</span></a>
+      <a href="other.html">Other <span>›</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<!-- SORT TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="toolbar-title">
+      <strong>Sort products</strong>
+      <span>Choose how you want to order items by price</span>
+    </div>
+
+    <div class="sort-buttons">
+      <button id="sortAsc" onclick="sortProducts('asc')">Sort by Price ↑</button>
+      <button id="sortDesc" onclick="sortProducts('desc')">Sort by Price ↓</button>
+    </div>
+  </div>
 </div>
 
 <div class="grid" id="productGrid">
+
   <!-- PRODUCT 1 -->
-  <a class="item" data-price="6.7" href="https://loongbuy.com/product-details?invitecode=2N24N0&weidian=7236343521" target="_blank">
+  <a class="item" data-price="6.7"
+     href="https://loongbuy.com/product-details?invitecode=2N24N0&weidian=7236343521"
+     target="_blank">
     <div class="overlay-name">LOONGBUY CAP</div>
-    <img src="https://cms.brnstc.de/product_images/680x930_retina/cpro/media/images/product/23/8/100153831911000_0_1692185447202.jpg" alt="LOONGBUY CAP">
+    <img src="https://cms.brnstc.de/product_images/680x930_retina/cpro/media/images/product/23/8/100153831911000_0_1692185447202.jpg"
+         alt="LOONGBUY CAP" loading="lazy">
     <div class="overlay-buy">Buy now</div>
     <div class="price">$6.7</div>
   </a>
 
   <!-- PRODUCT 2 -->
-  <a class="item" data-price="25.50" href="https://loongbuy.com/product-details?invitecode=2N24N0&other=002" target="_blank">
+  <a class="item" data-price="25.50"
+     href="https://loongbuy.com/product-details?invitecode=2N24N0&other=002"
+     target="_blank">
     <div class="overlay-name">LOONGBUY BAG</div>
     <img src="https://example.com/images/other-bag.jpg" loading="lazy" alt="LOONGBUY BAG">
     <div class="overlay-buy">Buy now</div>
@@ -103,39 +414,71 @@ header h1 a:hover { opacity:0.85; }
   </a>
 
   <!-- PRODUCT 3 -->
-  <a class="item" data-price="12.75" href="https://loongbuy.com/product-details?invitecode=2N24N0&other=003" target="_blank">
+  <a class="item" data-price="12.75"
+     href="https://loongbuy.com/product-details?invitecode=2N24N0&other=003"
+     target="_blank">
     <div class="overlay-name">LOONGBUY KEYCHAIN</div>
     <img src="https://example.com/images/other-keychain.jpg" loading="lazy" alt="LOONGBUY KEYCHAIN">
     <div class="overlay-buy">Buy now</div>
     <div class="price">$12.75</div>
   </a>
+
 </div>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('menu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
+  function isMobile(){
+    return window.matchMedia("(max-width: 768px)").matches;
+  }
 
-window.onclick = e => {
-  if(!e.target.closest('.menu-btn')) document.getElementById('menu').style.display = 'none';
-}
+  function toggleMenu(){
+    if (isMobile()){
+      document.getElementById('mobileSheet').classList.toggle('open');
+      return;
+    }
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  }
 
-// SORTING FUNCTION
-function sortProducts(order) {
-  const grid = document.getElementById('productGrid');
-  const items = Array.from(grid.getElementsByClassName('item'));
+  function closeMobileMenu(){
+    document.getElementById('mobileSheet').classList.remove('open');
+  }
 
-  items.sort((a,b) => {
-    const priceA = parseFloat(a.getAttribute('data-price'));
-    const priceB = parseFloat(b.getAttribute('data-price'));
-    return order === 'asc' ? priceA - priceB : priceB - priceA;
+  function sheetBackdropClose(e){
+    if (e.target.id === 'mobileSheet') closeMobileMenu();
+  }
+
+  // Close desktop dropdown if clicking outside
+  window.addEventListener('click', (e) => {
+    if(!isMobile()){
+      if(!e.target.closest('.menu-btn') && !e.target.closest('#menu')){
+        document.getElementById('menu').style.display = 'none';
+      }
+    }
   });
 
-  items.forEach(item => grid.appendChild(item));
-}
+  // SORTING + active state
+  function setActiveSort(order){
+    document.getElementById('sortAsc').classList.toggle('active', order === 'asc');
+    document.getElementById('sortDesc').classList.toggle('active', order === 'desc');
+  }
+
+  function sortProducts(order){
+    const grid = document.getElementById('productGrid');
+    const items = Array.from(grid.getElementsByClassName('item'));
+
+    items.sort((a,b) => {
+      const priceA = parseFloat(a.getAttribute('data-price'));
+      const priceB = parseFloat(b.getAttribute('data-price'));
+      return order === 'asc' ? priceA - priceB : priceB - priceA;
+    });
+
+    items.forEach(item => grid.appendChild(item));
+    setActiveSort(order);
+  }
+
+  // Default active
+  setActiveSort('asc');
 </script>
 
 </body>
 </html>
-
