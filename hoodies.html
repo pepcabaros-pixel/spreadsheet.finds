@@ -19,149 +19,80 @@ body { font-family: Arial, sans-serif; background:#f5f5f5; }
 
 /* ===== HEADER ===== */
 header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background: #333;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
+  position: fixed; top:0; width:100%; z-index:1000;
+  background:#333; color:white;
+  display:flex; justify-content:center; align-items:center;
+  padding:30px;
 }
-
-header h1 { font-size: 48px; }
-
-header h1 a {
-  color: white;
-  text-decoration: none;
-}
-
-header h1 a:hover { opacity: 0.85; }
+header h1 { font-size:48px; }
+header h1 a { color:white; text-decoration:none; }
+header h1 a:hover { opacity:0.85; }
 
 .menu-btn {
-  position: absolute;
-  right:30px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  position:absolute; right:30px; cursor:pointer;
+  display:flex; flex-direction:column; gap:6px;
 }
-
-.menu-btn span {
-  width:35px;
-  height:4px;
-  background:white;
-  border-radius:2px;
-}
+.menu-btn span { width:35px; height:4px; background:white; border-radius:2px; }
 
 .dropdown {
-  display:none;
-  position:absolute;
-  right:30px;
-  top:80px;
-  background:white;
-  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+  display:none; position:absolute; right:30px; top:80px;
+  background:white; box-shadow:0 4px 8px rgba(0,0,0,0.2);
   z-index:1001;
 }
-
 .dropdown a {
-  display:block;
-  padding:12px 20px;
-  color:black;
-  text-decoration:none;
+  display:block; padding:12px 20px; color:black; text-decoration:none;
 }
+.dropdown a:hover { background:#28a745; color:white; }
 
-.dropdown a:hover {
-  background:#28a745;
-  color:white;
+/* ===== SORT BUTTONS ===== */
+.sort-buttons { margin-top:100px; text-align:center; }
+.sort-buttons button {
+  padding:8px 16px; margin:0 5px; background:#28a745; color:white;
+  border:none; border-radius:6px; cursor:pointer; font-weight:bold;
 }
+.sort-buttons button:hover { opacity:0.85; }
 
 /* ===== GRID ===== */
 .grid {
-  margin-top:140px;
-  padding:20px;
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-  gap:20px;
+  margin-top:20px; padding:20px;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px;
 }
-
 .item {
-  position: relative;
-  overflow: hidden;
-  border-radius:12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  position:relative; overflow:hidden; border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; cursor:pointer;
 }
-
-.item:hover { transform: scale(1.03); }
-
+.item:hover { transform:scale(1.03); }
 .item img { width:100%; display:block; }
 
 /* ===== OVERLAYS ===== */
 .overlay-name {
-  position:absolute;
-  top:-25%;
-  left:0;
-  right:0;
-  height:25%;
-  background:rgba(0,0,0,0.8);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  transition:0.3s;
+  position:absolute; top:-25%; left:0; right:0; height:25%;
+  background:rgba(0,0,0,0.8); color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:bold; transition: top 0.3s;
 }
-
 .overlay-buy {
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:25px; /* stejné jako cena */
-  background:#28a745;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:18px;
-  transition: bottom 0.3s ease, opacity 0.3s ease;
-  opacity:0; /* na začátku neviditelné */
-  z-index:2;
+  position:absolute; bottom:0; left:0; right:0; height:25px;
+  background:#28a745; color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:bold; font-size:18px;
+  opacity:0; z-index:2;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
 }
 
-.item:hover .overlay-name { top:0; }
-
-/* ===== CENA ===== */
+/* CENA */
 .price {
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:25px;
-  background:rgba(0,0,0,0.85);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:16px;
-  z-index:1;
-  transition: opacity 0.3s ease;
+  position:absolute; bottom:0; left:0; right:0; height:25px;
+  background:rgba(0,0,0,0.85); color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:bold; font-size:16px;
+  z-index:1; transition:opacity 0.3s ease;
 }
 
-/* hover efekt: cena zmizí, Buy now vyjede */
-.item:hover .price {
-  opacity:0;
-}
-
-.item:hover .overlay-buy {
-  opacity:1;
-  bottom:0;
-}
+/* hover efekty */
+.item:hover .overlay-name { top:0; }
+.item:hover .overlay-buy { opacity:1; bottom:0; }
+.item:hover .price { opacity:0; }
 
 @media(max-width:768px){
   .grid { grid-template-columns:1fr; }
@@ -176,9 +107,7 @@ header h1 a:hover { opacity: 0.85; }
   <h1><a href="index.html">Hoodies</a></h1>
 
   <div class="menu-btn" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
 
   <div class="dropdown" id="menu">
@@ -189,219 +118,158 @@ header h1 a:hover { opacity: 0.85; }
   </div>
 </header>
 
-<div class="grid">
+<!-- SORT BUTTONS -->
+<div class="sort-buttons">
+  <button onclick="sortProducts('asc')">Sort by Price ↑</button>
+  <button onclick="sortProducts('desc')">Sort by Price ↓</button>
+</div>
+
+<div class="grid" id="productGrid">
 
   <!-- PRODUCT 1 -->
-  <a class="item"
+  <a class="item" data-price="12.4"
      href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=7611547689"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'ESSENTIALS HOODIE'});">
-
     <div class="overlay-name">ESSENTIALS HOODIE</div>
-
     <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRM3N2nODGWacCOB84eRw2QagBk868DhYDelA9t9JE_ovL1waJf_Pf4Ru-_7NQ654sEYt7mQCS9VDrQUEzkEaOYRUnAA5qeEVwAthgELvEAuZvzuukWAqDDCdIRr6wk260m6sM2P8vcUA&usqp=CAc"
-         alt="Essentials Hoodie"
-         loading="lazy">
-
-    <!-- zelený Buy now, na začátku neviditelný -->
+         alt="Essentials Hoodie" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
-    <!-- ZDE UPRAV TEXT CENY -->
     <div class="price">$12.4</div>
   </a>
 
-  <a class="item"
+  <!-- PRODUCT 2 -->
+  <a class="item" data-price="18.47"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=736469349863"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'RALPH LAUREN ZIP UP'});">
-
     <div class="overlay-name">RALPH LAUREN ZIP UP</div>
-
     <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR7fjsYdqfP_Iu4_N-x1mf6jPL7f1ro1yURabICtTMA0x-HwUeTMHZANz0B6QJwMnW9u7K_5EWUYhV4KKK-UmxuWXylzx-9niaT-NnSqteZLAZFSWmdV4BYkHqFHE7y-V7vz1gmHQ&usqp=CAc"
-         alt="RALPH LAUREN ZIP UP"
-         loading="lazy">
-
+         alt="RALPH LAUREN ZIP UP" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$18.47</div>
   </a>
 
-  <a class="item"
+  <!-- PRODUCT 3 -->
+  <a class="item" data-price="16.82"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=738528616022"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'RALPH LAUREN SWEATER'});">
-
     <div class="overlay-name">RALPH LAUREN SWEATER</div>
-
     <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR371RWtoRBRZYnUoMrDrY8WPonUBlRMjoDzKa0ygywRlt-5rXqI4L_s1FouUaQXr5nFtDKhra6aaT9443uta2_AFmxDg-SrXvwljPYFMmCyLWJfr7Sz3a94TY97pSpY14bj-CIU0M&usqp=CAc"
-         alt="RALPH LAUREN SWEATER"
-         loading="lazy">
-
+         alt="RALPH LAUREN SWEATER" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$16.82</div>
   </a>
 
-  <a class="item"
+  <!-- PRODUCT 4 -->
+  <a class="item" data-price="23.69"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=640860232414"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'STUSSY SWEATER BILLIARD'});">
-
     <div class="overlay-name">STUSSY SWEATER BILLIARD</div>
-
     <img src="https://smoothitalia.com/wp-content/uploads/2021/03/stussy-billard-sweater-navy-117086-01.jpg"
-         alt="STUSSY SWEATER BILLIARD"
-         loading="lazy">
-
+         alt="STUSSY SWEATER BILLIARD" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$23.69</div>
- </a>
-    
-  <a class="item"
+  </a>
+
+  <!-- PRODUCT 5 -->
+  <a class="item" data-price="51.16"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=665534784691"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'SUPREME HOODIE'});">
-
     <div class="overlay-name">SUPREME HOODIE</div>
-
     <img src="https://cdn.myshoptet.com/usr/www.efyx.cz/user/shop/big/2651_supreme-box-logo-hooded-sweatshirt--fw24.jpg?675c30e7"
-         alt="SUPREME HOODIE"
-         loading="lazy">
-
+         alt="SUPREME HOODIE" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$51.16</div>
   </a>
-  
-  <a class="item"
+
+  <!-- PRODUCT 6 -->
+  <a class="item" data-price="19.97"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=707885562165"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'NIKE TECH FLEECE'});">
-
     <div class="overlay-name">NIKE TECH FLEECE</div>
-
     <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRJjooyK6zw5RhV_L0AgFSqP5Tpco9U08qfUPfBxzDmrChVVehPs4hPMUbKx5biO5fYd8Khh4Vs31ivrmZR_glMuRT48baDuz0SgI4i_OPJvSYII_sRTLVdafC5GHLzcte8BKMtAMy5NZ4&usqp=CAc"
-         alt="NIKE TECH FLEECE"
-         loading="lazy">
-
+         alt="NIKE TECH FLEECE" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$19.97</div>
   </a>
-      
-  <a class="item"
+
+  <!-- PRODUCT 7 -->
+  <a class="item" data-price="14.57"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=678349425250"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'TRAPSTAR HOODIE'});">
-
     <div class="overlay-name">TRAPSTAR HOODIE</div>
-
     <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQLIYhxLVEvShFkTBjLt3qzFjT1rLSWpIXGx8mnAZB3iJAXPYM-_xPVxbTke74YTkgahbVWOkUzSvEXARrEYonwiR0WD5EGHZ-t6v751bEpClr26tKNio9k-OCWs5GMCpOHcTf91lSEoA&usqp=CAc"
-         alt="TRAPSTAR HOODIE"
-         loading="lazy">
-
+         alt="TRAPSTAR HOODIE" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$14.57</div>
   </a>
-  
-  <a class="item"
+
+  <!-- PRODUCT 8 -->
+  <a class="item" data-price="13.74"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=685791571977"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'GALLERY DEPT ZIP UP'});">
-
     <div class="overlay-name">GALLERY DEPT ZIP UP</div>
-
     <img src="https://cdn.clothbase.com/uploads/5cb31936-478e-4b8f-a8c4-ca3db3808629/image.jpg"
-         alt="GALLERY DEPT ZIP UP"
-         loading="lazy">
-
+         alt="GALLERY DEPT ZIP UP" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$13.74</div>
   </a>
-    
-  <a class="item"
+
+  <!-- PRODUCT 9 -->
+  <a class="item" data-price="13.74"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=685791571977"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'GALLERY DEPT HOODIE'});">
-
     <div class="overlay-name">GALLERY DEPT HOODIE</div>
-
     <img src="https://gallerydept.com/cdn/shop/files/90_S-GD-LOGO-HOODIE-_VINTAGE-BLACK_-GDLH-50025---L-_Front.jpg"
-         alt="GALLERY DEPT HOODIE"
-         loading="lazy">
-
+         alt="GALLERY DEPT HOODIE" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$13.74</div>
   </a>
-        
-  <a class="item"
+
+  <!-- PRODUCT 10 -->
+  <a class="item" data-price="25.51"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=817686026285"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'PLAYBOI CARTI HOODIE'});">
-
     <div class="overlay-name">PLAYBOI CARTI HOODIE</div>
-
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS10ee92NOH86-aDrkXgUE-GiWcTOUEvPGfXA&s"
-         alt="PLAYBOI CARTI HOODIE"
-         loading="lazy">
-
+         alt="PLAYBOI CARTI HOODIE" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$25.51</div>
   </a>
-      
-  <a class="item"
+
+  <!-- PRODUCT 11 -->
+  <a class="item" data-price="26.76"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=602105062252"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'ANTI SOCIAL CLUB HOODIE'});">
-
     <div class="overlay-name">ANTI SOCIAL CLUB HOODIE</div>
-
     <img src="https://0.allegroimg.com/original/039e2f/357ced4748f8a4ea2e7d205e6400/ANTI-SOCIAL-SOCIAL-CLUB-MIKINA-S-KAPUCI-ASSC-L"
-         alt="ANTI SOCIAL CLUB HOODIE"
-         loading="lazy">
-
+         alt="ANTI SOCIAL CLUB HOODIE" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$26.76</div>
   </a>
-          
-  <a class="item"
+
+  <!-- PRODUCT 12 -->
+  <a class="item" data-price="26.8"
      href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=769586869842"
      target="_blank"
      onclick="gtag('event','click',{'event_category':'affiliate','event_label':'AMIRI HOODIE'});">
-
     <div class="overlay-name">AMIRI HOODIE</div>
-
     <img src="https://cdn-images.farfetch-contents.com/23/26/83/31/23268331_53908095_600.jpg"
-         alt="AMIRI HOODIE"
-         loading="lazy">
-
+         alt="AMIRI HOODIE" loading="lazy">
     <div class="overlay-buy">Buy now</div>
-
     <div class="price">$26.8</div>
   </a>
-            
-  <a class="item"
-     href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=681682836335"
-     target="_blank"
-     onclick="gtag('event','click',{'event_category':'affiliate','event_label':'HOODIE'});">
 
-    <div class="overlay-name">HOODIE</div>
-
-    <img src="https://www.belabel.cz/products/noprintProductImages/thumbs/11262_1.jpg"
-         alt="HOODIE"
-         loading="lazy">
-
-    <div class="overlay-buy">Buy now</div>
-
-    <div class="price">$67.67</div>
-  </a>
-  
 </div>
 
 <script>
@@ -413,7 +281,19 @@ window.onclick = e => {
   if(!e.target.closest('.menu-btn')){
     document.getElementById('menu').style.display = 'none';
   }
-};
+}
+
+// SORTING FUNCTION
+function sortProducts(order){
+  const grid = document.getElementById('productGrid');
+  const items = Array.from(grid.getElementsByClassName('item'));
+  items.sort((a,b) => {
+    const priceA = parseFloat(a.getAttribute('data-price'));
+    const priceB = parseFloat(b.getAttribute('data-price'));
+    return order === 'asc' ? priceA - priceB : priceB - priceA;
+  });
+  items.forEach(item => grid.appendChild(item));
+}
 </script>
 
 </body>
