@@ -269,7 +269,7 @@
     backdrop-filter: blur(10px);
   }
 
-  /* Background images (same URLs as you had) */
+  /* Background images */
   .shoes::before   { background-image:url('https://sectionstore.cz/cdn/shop/files/NikeAirForce1LowSupremeBlack.jpg?v=1723555340&width=1445'); }
   .tshirts::before { background-image:url('https://si.geilicdn.com/open1639122105-1234478995-654b0000018f0e3fbb440a239631_1081_1073.jpg'); }
   .jackets::before { background-image:url('https://sectionstore.cz/cdn/shop/files/PalacePertexOpaqueBalaclavaPufferJacketBlack.jpg?v=1733326472&width=1445'); }
@@ -291,7 +291,6 @@
   }
   .modal-overlay.open{ display:flex; }
 
-  /* smaller modal */
   .modal{
     width:min(520px, 100%);
     background:#fff;
@@ -329,7 +328,6 @@
     gap:10px;
   }
 
-  /* announcement box */
   .notice{
     border:1px solid rgba(34,197,94,.22);
     background:rgba(34,197,94,.08);
@@ -345,22 +343,6 @@
     color:var(--muted);
     font-size:13px;
     line-height:1.45;
-  }
-
-  .modal-textarea{
-    width:100%;
-    min-height:96px;
-    resize:vertical;
-    border-radius:16px;
-    border:1px solid rgba(15,23,42,.12);
-    padding:12px 12px;
-    font-size:14px;
-    outline:none;
-    box-shadow:0 10px 22px rgba(2,6,23,.05);
-  }
-  .modal-textarea:focus{
-    border-color:rgba(34,197,94,.55);
-    box-shadow:0 0 0 4px var(--ring), 0 10px 22px rgba(2,6,23,.06);
   }
 
   .modal-footer{
@@ -388,7 +370,7 @@
 
   .modal-action{
     display:flex;
-    justify-content:center; /* bottom center button */
+    justify-content:center;
   }
 
   .modal-btn{
@@ -410,7 +392,6 @@
   }
   .modal-btn:active{ transform: translateY(0); opacity:.92; }
 
-  /* ===== MOBILE TUNING ===== */
   @media (max-width: 768px){
     header{ padding:18px 14px; }
     header h1{ font-size:32px; }
@@ -457,7 +438,6 @@
     <span></span><span></span><span></span>
   </div>
 
-  <!-- Desktop dropdown -->
   <div class="dropdown" id="dropdownMenu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
@@ -468,7 +448,6 @@
   </div>
 </header>
 
-<!-- Mobile sheet menu -->
 <div class="mobile-sheet" id="mobileSheet" onclick="sheetBackdropClose(event)">
   <div class="sheet-card" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="sheet-top">
@@ -489,7 +468,6 @@
 <div class="spacer"></div>
 
 <div class="page">
-  <!-- LANDING GRID -->
   <div class="container">
     <div class="tile shoes" onclick="location.href='shoes.html'">
       <div class="tile-content">
@@ -562,20 +540,12 @@
     </div>
 
     <div class="modal-body">
-      <!-- ✅ MAIN TEXT AS ANNOUNCEMENT -->
       <div class="notice">
-        <strong>Get $300 in coupons</strong>
+        <strong>Get $300 completely free</strong>
         <p>
           If you don’t have a Loongbuy account yet, create one with the button below to unlock bonuses.
         </p>
       </div>
-
-      <!-- ✅ OPTIONAL textbox (you wanted "write what I want") -->
-      <textarea
-        class="modal-textarea"
-        id="userNote"
-        placeholder="(Optional) Write anything here…"
-      ></textarea>
     </div>
 
     <div class="modal-footer">
@@ -585,7 +555,6 @@
       </label>
 
       <div class="modal-action">
-        <!-- ✅ BUTTON redirects to link below -->
         <button class="modal-btn" onclick="goToModalLink()">
           Continue
         </button>
@@ -627,26 +596,19 @@
 
   /* ===== POPUP LOGIC ===== */
   const LS_HIDE_KEY = "lb_hide_welcome_modal";
-  const LS_NOTE_KEY = "lb_user_note";
 
   // ✅ SEM DEJ ODKAZ, kam má tlačítko přesměrovat:
   const MODAL_BUTTON_LINK = "https://www.loongbuy.com/register?code=2N24N0"; // <-- SEM DEJ SVŮJ ODKAZ
 
   function openWelcomeModal(){
     document.getElementById('welcomeModal').classList.add('open');
-    const saved = localStorage.getItem(LS_NOTE_KEY);
-    if(saved) document.getElementById('userNote').value = saved;
   }
 
   function closeWelcomeModal(){
-    const note = document.getElementById('userNote').value || "";
-    localStorage.setItem(LS_NOTE_KEY, note);
-
     const dontShow = document.getElementById('dontShowAgain').checked;
     if(dontShow){
       localStorage.setItem(LS_HIDE_KEY, "1");
     }
-
     document.getElementById('welcomeModal').classList.remove('open');
   }
 
