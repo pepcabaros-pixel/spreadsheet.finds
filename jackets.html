@@ -2,16 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Jackets</title>
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RWRY3884G7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-RWRY3884G7');
-</script>
+<title>Pants</title>
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -19,80 +10,48 @@ body { font-family: Arial, sans-serif; background:#f5f5f5; }
 
 /* ===== HEADER ===== */
 header {
-  position: fixed; top:0; width:100%; z-index:1000;
-  background:#333; color:white;
   display:flex; justify-content:center; align-items:center;
-  padding:30px;
+  padding:30px; background:#333; color:white; position:fixed; width:100%; top:0; z-index:1000;
 }
 header h1 { font-size:48px; }
 header h1 a { color:white; text-decoration:none; }
 header h1 a:hover { opacity:0.85; }
-
-.menu-btn {
-  position:absolute; right:30px; cursor:pointer;
-  display:flex; flex-direction:column; gap:6px;
-}
+.menu-btn { position:absolute; right:30px; cursor:pointer; display:flex; flex-direction:column; gap:6px; }
 .menu-btn span { width:35px; height:4px; background:white; border-radius:2px; }
-
-.dropdown {
-  display:none; position:absolute; right:30px; top:80px;
-  background:white; box-shadow:0 4px 8px rgba(0,0,0,0.2);
-}
-.dropdown a {
-  display:block; padding:12px 20px; color:black; text-decoration:none;
-}
+.dropdown { display:none; position:absolute; right:30px; top:80px; background:white; box-shadow:0 4px 8px rgba(0,0,0,0.2); }
+.dropdown a { display:block; padding:12px 20px; color:black; text-decoration:none; }
 .dropdown a:hover { background:#28a745; color:white; }
 
+/* ===== SORT BUTTONS ===== */
+.sort-buttons { margin-top:100px; text-align:center; }
+.sort-buttons button {
+  padding:8px 16px; margin:0 5px; background:#28a745; color:white;
+  border:none; border-radius:6px; cursor:pointer; font-weight:bold;
+}
+.sort-buttons button:hover { opacity:0.85; }
+
 /* ===== GRID ===== */
-.grid {
-  margin-top:140px;
-  padding:20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:20px;
-}
-.item {
-  position:relative;
-  overflow:hidden;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
-  cursor:pointer;
-}
+.grid { margin-top:20px; padding:20px; display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+.item { position:relative; overflow:hidden; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; cursor:pointer; }
 .item:hover { transform:scale(1.03); }
 .item img { width:100%; display:block; }
 
 /* ===== OVERLAYS ===== */
 .overlay-name {
-  position:absolute;
-  top:-25%; left:0; right:0; height:25%;
-  background:rgba(0,0,0,0.8); color:white;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:bold; transition: top 0.3s;
+  position:absolute; top:-25%; left:0; right:0; height:25%;
+  background:rgba(0,0,0,0.8); color:white; display:flex; align-items:center; justify-content:center;
+  font-weight:bold; transition:top 0.3s ease;
 }
 .overlay-buy {
-  position:absolute;
-  bottom:0; left:0; right:0; height:25px;
-  background:#28a745; color:white;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:bold; font-size:18px;
-  opacity:0; /* začíná skryté */
-  z-index:2;
-  transition: opacity 0.3s ease, bottom 0.3s ease;
+  position:absolute; bottom:0; left:0; right:0; height:25px; background:#28a745; color:white;
+  display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:18px;
+  opacity:0; z-index:2; transition:opacity 0.3s ease, bottom 0.3s ease;
 }
-
-/* CENA */
 .price {
-  position:absolute;
-  bottom:0; left:0; right:0; height:25px;
-  background:rgba(0,0,0,0.85); color:white;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:bold; font-size:16px;
-  z-index:1;
-  transition: opacity 0.3s ease;
+  position:absolute; bottom:0; left:0; right:0; height:25px; background:rgba(0,0,0,0.85);
+  color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:16px;
+  z-index:1; transition:opacity 0.3s ease;
 }
-
-/* hover efekty */
 .item:hover .overlay-name { top:0; }
 .item:hover .overlay-buy { opacity:1; bottom:0; }
 .item:hover .price { opacity:0; }
@@ -107,68 +66,71 @@ header h1 a:hover { opacity:0.85; }
 <body>
 
 <header>
-  <!-- 👇 klikací nadpis -->
-  <h1><a href="index.html">Jackets</a></h1>
-
-  <div class="menu-btn" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
-
+  <h1><a href="index.html">Pants</a></h1>
+  <div class="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   <div class="dropdown" id="menu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
     <a href="jackets.html">Jackets</a>
     <a href="hoodies.html">Hoodies</a>
+    <a href="pants.html">Pants</a>
   </div>
 </header>
 
-<div class="grid">
+<!-- SORT BUTTONS -->
+<div class="sort-buttons">
+  <button onclick="sortProducts('asc')">Sort by Price ↑</button>
+  <button onclick="sortProducts('desc')">Sort by Price ↓</button>
+</div>
 
+<div class="grid" id="productGrid">
   <!-- PRODUCT 1 -->
-  <a class="item"
-     href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=794595773240"
-     target="_blank"
-     onclick="gtag('event','click',{'event_category':'affiliate','event_label':'TRAPSTAR JACKET'});">
-
-    <div class="overlay-name">TRAPSTAR JACKET</div>
-
-    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRbO3F3IkpyU1dTcxxrzm4R_XzLW-HBUHxeOMxrJomKhyQ5ljneBGoDc3NZn7ChOvd5y3_1FOtfKHnY9tIIoknUJlaH23-NlkxsbCNqhmNbFxNYAkbjeRXG"
-         loading="lazy" alt="TRAPSTAR JACKET">
-
+  <a class="item" data-price="45.99" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=1234567890" target="_blank">
+    <div class="overlay-name">Chino Pants</div>
+    <img src="https://example.com/chino.jpg" loading="lazy" alt="Chino Pants">
     <div class="overlay-buy">Buy now</div>
-
-    <!-- 👇 upravit cenu zde -->
-    <div class="price">$37.75</div>
+    <div class="price">$45.99</div>
   </a>
 
-  <!-- zde můžeš přidat další produkty stejným stylem -->
   <!-- PRODUCT 2 -->
-  <a class="item"
-     href="https://loongbuy.com/product-details?invitecode=2N24N0&weidian=6938203478"
-     target="_blank">
-
-    <div class="overlay-name">MONCLER JACKET</div>
-
-    <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQUjfylhkO0J2XnZQ6Qc__zVPEp8UtaQtgIg7jYqEgyP51-bcljPWwlLK29YMSwclxZTVVieuW_ZQ6wnPym5Mo0UXBoGgRDIHzDE4beuNX5SOmTvdDPcowzdPyhv6GkjtAts8Vc6BM&usqp=CAc"
-         loading="lazy" alt="MONCLER JACKET">
-
+  <a class="item" data-price="39.99" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=0987654321" target="_blank">
+    <div class="overlay-name">Jogger Pants</div>
+    <img src="https://example.com/jogger.jpg" loading="lazy" alt="Jogger Pants">
     <div class="overlay-buy">Buy now</div>
-
-    <!-- 👇 upravit cenu zde -->
-    <div class="price">$69.77</div>
+    <div class="price">$39.99</div>
   </a>
 
+  <!-- PRODUCT 3 -->
+  <a class="item" data-price="55.50" href="https://www.loongbuy.com/product-details?invitecode=2N24N0&weidian=1122334455" target="_blank">
+    <div class="overlay-name">Cargo Pants</div>
+    <img src="https://example.com/cargo.jpg" loading="lazy" alt="Cargo Pants">
+    <div class="overlay-buy">Buy now</div>
+    <div class="price">$55.50</div>
+  </a>
 </div>
 
 <script>
-function toggleMenu(){
+function toggleMenu() {
   const menu = document.getElementById('menu');
   menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
+
 window.onclick = e => {
-  if(!e.target.closest('.menu-btn')){
-    document.getElementById('menu').style.display = 'none';
-  }
+  if(!e.target.closest('.menu-btn')) document.getElementById('menu').style.display = 'none';
+}
+
+// SORTING FUNCTION
+function sortProducts(order) {
+  const grid = document.getElementById('productGrid');
+  const items = Array.from(grid.getElementsByClassName('item'));
+
+  items.sort((a,b) => {
+    const priceA = parseFloat(a.getAttribute('data-price'));
+    const priceB = parseFloat(b.getAttribute('data-price'));
+    return order === 'asc' ? priceA - priceB : priceB - priceA;
+  });
+
+  items.forEach(item => grid.appendChild(item));
 }
 </script>
 
