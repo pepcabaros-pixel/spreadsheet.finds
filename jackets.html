@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>JACKETS</title>
 
 <!-- Google Analytics -->
@@ -14,88 +15,225 @@
 </script>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: Arial, sans-serif; background:#f5f5f5; }
+:root{
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --green:#22c55e;
+  --greenDark:#16a34a;
+  --headerTop:#0b1220;
+  --headerBottom:#111827;
+  --ring:rgba(34,197,94,.35);
+  --shadow:0 10px 30px rgba(2,6,23,.08);
+  --shadowHover:0 18px 45px rgba(2,6,23,.14);
+  --radius:16px;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
 
 /* ===== HEADER ===== */
-header {
-  position: fixed; top:0; width:100%; z-index:1000;
-  background:#333; color:white;
-  display:flex; justify-content:center; align-items:center;
-  padding:30px;
+header{
+  position:fixed;
+  top:0; left:0; width:100%;
+  z-index:1000;
+  background:linear-gradient(180deg, var(--headerTop) 0%, var(--headerBottom) 100%);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:22px 18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
 }
-header h1 { font-size:48px; }
-header h1 a { color:white; text-decoration:none; }
-header h1 a:hover { opacity:0.85; }
+header h1{ font-size:40px; }
+header h1 a{ color:white; text-decoration:none; }
 
-.menu-btn {
-  position:absolute; right:30px; cursor:pointer;
+.menu-btn{
+  position:absolute; right:14px;
+  cursor:pointer;
   display:flex; flex-direction:column; gap:6px;
+  padding:12px; border-radius:14px;
 }
-.menu-btn span { width:35px; height:4px; background:white; border-radius:2px; }
+.menu-btn span{ width:34px; height:3px; background:white; border-radius:2px; }
 
-.dropdown {
-  display:none; position:absolute; right:30px; top:80px;
-  background:white; box-shadow:0 4px 8px rgba(0,0,0,0.2);
+.dropdown{
+  display:none;
+  position:absolute;
+  right:14px; top:74px;
+  background:white;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  z-index:1001;
 }
-.dropdown a {
-  display:block; padding:12px 20px; color:black; text-decoration:none;
+.dropdown a{
+  display:block;
+  padding:12px 14px;
+  color:var(--text);
+  text-decoration:none;
+  font-weight:800;
 }
-.dropdown a:hover { background:#28a745; color:white; }
+.dropdown a:hover{
+  background:rgba(34,197,94,.1);
+  color:var(--greenDark);
+}
 
-/* ===== SORT BUTTONS ===== */
-.sort-buttons { margin-top:100px; text-align:center; }
-.sort-buttons button {
-  padding:8px 16px; margin:0 5px; background:#28a745; color:white;
-  border:none; border-radius:6px; cursor:pointer; font-weight:bold;
+/* ===== MOBILE MENU ===== */
+.mobile-sheet{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.55);
+  backdrop-filter: blur(6px);
+  display:none;
+  z-index:2000;
+  padding:14px;
 }
-.sort-buttons button:hover { opacity:0.85; }
+.mobile-sheet.open{ display:block; }
+
+.sheet-card{
+  max-width:560px;
+  margin:0 auto;
+  background:white;
+  border-radius:22px;
+  overflow:hidden;
+}
+.sheet-top{
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(15,23,42,.08);
+}
+.sheet-links a{
+  display:block;
+  padding:16px;
+  font-weight:900;
+  text-decoration:none;
+  color:var(--text);
+  border-bottom:1px solid rgba(15,23,42,.06);
+}
+
+/* ===== SPACERS ===== */
+.spacer{ height:86px; }
+
+/* ===== SORT BAR ===== */
+.toolbar{
+  position:sticky;
+  top:86px;
+  z-index:900;
+  background:rgba(246,247,251,.8);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(15,23,42,.06);
+  padding:14px;
+}
+.toolbar-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.sort-buttons{
+  display:flex; gap:10px;
+}
+.sort-buttons button{
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.1);
+  background:white;
+  cursor:pointer;
+  font-weight:900;
+}
+.sort-buttons button.active{
+  background:linear-gradient(180deg, var(--green), var(--greenDark));
+  color:white;
+  border:none;
+}
 
 /* ===== GRID ===== */
-.grid {
-  margin-top:20px; padding:20px;
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px;
+.grid{
+  max-width:1100px;
+  margin:auto;
+  padding:16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;
 }
-.item {
-  position:relative; overflow:hidden; border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; cursor:pointer;
+.item{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius);
+  background:white;
+  box-shadow:var(--shadow);
+  transition:.2s;
 }
-.item:hover { transform:scale(1.03); }
-.item img { width:100%; display:block; }
+.item:hover{ transform:translateY(-4px); box-shadow:var(--shadowHover); }
+
+.item img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:contain;
+  padding:14px;
+}
 
 /* ===== OVERLAYS ===== */
-.overlay-name {
-  position:absolute; top:-25%; left:0; right:0; height:25%;
-  background:rgba(0,0,0,0.8); color:white;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:bold; transition: top 0.3s;
+.overlay-name{
+  position:absolute;
+  top:10px; left:10px; right:10px;
+  background:rgba(15,23,42,.85);
+  color:white;
+  padding:10px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:900;
+  opacity:0;
+  transition:.2s;
 }
-.overlay-buy {
-  position:absolute; bottom:0; left:0; right:0; height:25px;
-  background:#28a745; color:white;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:bold; font-size:18px;
-  opacity:0; z-index:2;
-  transition: opacity 0.3s ease, bottom 0.3s ease;
+.overlay-buy{
+  position:absolute;
+  left:10px; right:10px; bottom:10px;
+  height:42px;
+  background:linear-gradient(180deg, var(--green), var(--greenDark));
+  color:white;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  opacity:0;
+  transition:.2s;
+}
+.price{
+  position:absolute;
+  left:10px; right:10px; bottom:10px;
+  height:42px;
+  background:rgba(2,6,23,.85);
+  color:white;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  transition:.2s;
 }
 
-/* CENA */
-.price {
-  position:absolute; bottom:0; left:0; right:0; height:25px;
-  background:rgba(0,0,0,0.85); color:white;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:bold; font-size:16px;
-  z-index:1; transition:opacity 0.3s ease;
-}
+.item:hover .overlay-name,
+.item:hover .overlay-buy{ opacity:1; }
+.item:hover .price{ opacity:0; }
 
-/* hover efekty */
-.item:hover .overlay-name { top:0; }
-.item:hover .overlay-buy { opacity:1; bottom:0; }
-.item:hover .price { opacity:0; }
-
+/* ===== MOBILE ===== */
 @media(max-width:768px){
-  .grid { grid-template-columns:1fr; }
-  header h1 { font-size:36px; }
+  header h1{ font-size:32px; }
+  .dropdown{ display:none!important; }
+  .grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:420px){
+  .grid{ grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -103,13 +241,8 @@ header h1 a:hover { opacity:0.85; }
 <body>
 
 <header>
-  <!-- 👇 klikací nadpis -->
   <h1><a href="index.html">JACKETS</a></h1>
-
-  <div class="menu-btn" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
-
+  <div class="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   <div class="dropdown" id="menu">
     <a href="shoes.html">Shoes</a>
     <a href="tshirts.html">T-shirts</a>
@@ -120,72 +253,83 @@ header h1 a:hover { opacity:0.85; }
   </div>
 </header>
 
-<!-- SORT BUTTONS -->
-<div class="sort-buttons">
-  <button onclick="sortProducts('asc')">Sort by Price ↑</button>
-  <button onclick="sortProducts('desc')">Sort by Price ↓</button>
+<div class="mobile-sheet" id="mobileSheet" onclick="sheetClose(event)">
+  <div class="sheet-card">
+    <div class="sheet-top">
+      <strong>Menu</strong>
+      <button onclick="closeMobile()">✕</button>
+    </div>
+    <div class="sheet-links">
+      <a href="shoes.html">Shoes</a>
+      <a href="tshirts.html">T-shirts</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="hoodies.html">Hoodies</a>
+      <a href="pants.html">Pants</a>
+      <a href="other.html">Other</a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <strong>Sort by price</strong>
+    <div class="sort-buttons">
+      <button id="asc" onclick="sortProducts('asc')">↑ Price</button>
+      <button id="desc" onclick="sortProducts('desc')">↓ Price</button>
+    </div>
+  </div>
 </div>
 
 <div class="grid" id="productGrid">
 
-  <!-- PRODUCT 1 -->
-  <a class="item" data-price="37.75"
-     href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=794595773240"
-     target="_blank"
-     onclick="gtag('event','click',{'event_category':'affiliate','event_label':'TRAPSTAR JACKET'});">
+  <a class="item" data-price="37.75" href="https://loongbuy.com/product-details?invitecode=2N24N0&taobao=794595773240" target="_blank">
     <div class="overlay-name">TRAPSTAR JACKET</div>
-    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRbO3F3IkpyU1dTcxxrzm4R_XzLW-HBUHxeOMxrJomKhyQ5ljneBGoDc3NZn7ChOvd5y3_1FOtfKHnY9tIIoknUJlaH23-NlkxsbCNqhmNbFxNYAkbjeRXG"
-         loading="lazy" alt="TRAPSTAR JACKET">
+    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRbO3F3IkpyU1dTcxxrzm4R_XzLW-HBUHxeOMxrJomKhyQ5ljneBGoDc3NZn7ChOvd5y3_1FOtfKHnY9tIIoknUJlaH23-NlkxsbCNqhmNbFxNYAkbjeRXG">
     <div class="overlay-buy">Buy now</div>
     <div class="price">$37.75</div>
   </a>
 
-  <!-- PRODUCT 2 -->
-  <a class="item" data-price="69.77"
-     href="https://loongbuy.com/product-details?invitecode=2N24N0&weidian=6938203478"
-     target="_blank">
+  <a class="item" data-price="69.77" href="https://loongbuy.com/product-details?invitecode=2N24N0&weidian=6938203478" target="_blank">
     <div class="overlay-name">MONCLER JACKET</div>
-    <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQUjfylhkO0J2XnZQ6Qc__zVPEp8UtaQtgIg7jYqEgyP51-bcljPWwlLK29YMSwclxZTVVieuW_ZQ6wnPym5Mo0UXBoGgRDIHzDE4beuNX5SOmTvdDPcowzdPyhv6GkjtAts8Vc6BM&usqp=CAc"
-         loading="lazy" alt="MONCLER JACKET">
+    <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQUjfylhkO0J2XnZQ6Qc__zVPEp8UtaQtgIg7jYqEgyP51-bcljPWwlLK29YMSwclxZTVVieuW_ZQ6wnPym5Mo0UXBoGgRDIHzDE4beuNX5SOmTvdDPcowzdPyhv6GkjtAts8Vc6BM&usqp=CAc">
     <div class="overlay-buy">Buy now</div>
     <div class="price">$69.77</div>
   </a>
 
-  <a class="item" data-price="418.45"
-     href="https://loongbuy.com/product-details?invitecode=2N24N0&weidian=4440584200"
-     target="_blank">
+  <a class="item" data-price="418.45" href="https://loongbuy.com/product-details?invitecode=2N24N0&weidian=4440584200" target="_blank">
     <div class="overlay-name">NASA</div>
-    <img src="https://www.highsnobiety.com/static-assets/dato/1682637909-balenciaga-nasa-collaboration-collection-8.jpg"
-         loading="lazy" alt="NASA">
+    <img src="https://www.highsnobiety.com/static-assets/dato/1682637909-balenciaga-nasa-collaboration-collection-8.jpg">
     <div class="overlay-buy">Buy now</div>
     <div class="price">$418.45</div>
   </a>
-  
+
 </div>
 
 <script>
+function isMobile(){ return window.innerWidth < 768; }
+
 function toggleMenu(){
-  const menu = document.getElementById('menu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
-window.onclick = e => {
-  if(!e.target.closest('.menu-btn')){
-    document.getElementById('menu').style.display = 'none';
+  if(isMobile()){
+    document.getElementById('mobileSheet').classList.toggle('open');
+  } else {
+    const m=document.getElementById('menu');
+    m.style.display=m.style.display==='block'?'none':'block';
   }
 }
+function closeMobile(){ document.getElementById('mobileSheet').classList.remove('open'); }
+function sheetClose(e){ if(e.target.id==='mobileSheet') closeMobile(); }
 
-// SORTING FUNCTION
 function sortProducts(order){
-  const grid = document.getElementById('productGrid');
-  const items = Array.from(grid.getElementsByClassName('item'));
-
-  items.sort((a,b) => {
-    const priceA = parseFloat(a.getAttribute('data-price'));
-    const priceB = parseFloat(b.getAttribute('data-price'));
-    return order === 'asc' ? priceA - priceB : priceB - priceA;
-  });
-
-  items.forEach(item => grid.appendChild(item));
+  const grid=document.getElementById('productGrid');
+  const items=[...grid.children];
+  items.sort((a,b)=>order==='asc'
+    ? a.dataset.price-b.dataset.price
+    : b.dataset.price-a.dataset.price);
+  items.forEach(i=>grid.appendChild(i));
+  document.getElementById('asc').classList.toggle('active',order==='asc');
+  document.getElementById('desc').classList.toggle('active',order==='desc');
 }
 </script>
 
